@@ -1,0 +1,21 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fsdragon.android.survey.app.MainActivity" >
+
+    <item android:id="@+id/action_About"
+        android:title="@string/About"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_share"
+        android:title="@string/Share"
+        android:orderInCategory="99"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_newSurvey"
+        android:title="@string/New"
+        android:orderInCategory="98"
+        app:showAsAction="withText" />
+</menu>
