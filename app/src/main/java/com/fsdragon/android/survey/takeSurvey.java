@@ -31,7 +31,8 @@ public class takeSurvey extends Activity implements View.OnClickListener {
     List<Integer> answerList = new ArrayList<Integer>();
     List<String> questionList = new ArrayList<String>();
     int currentQuestionID = 0;
-    Integer participantID = 0;
+    int participantPosition = 0;
+    String participantID = null;
     TextView question, progress;
     Button next;
     SeekBar seekBar;
@@ -59,13 +60,12 @@ public class takeSurvey extends Activity implements View.OnClickListener {
         //Toast.makeText(takeSurvey.this, Integer.toString(survey_ID), Toast.LENGTH_SHORT).show();
 
         getQuestions(this, survey_ID, questionList);
-        participantID = getParticipantID(this, survey_ID);
-       // Toast.makeText(takeSurvey.this, Integer.toString(participantID), Toast.LENGTH_SHORT).show();
+        participantPosition = getParticipantPosition(this, survey_ID);
         question.setText(questionList.get(currentQuestionID));
         currentQuestionID++;
         progress.setText(currentQuestionID + "/" + questionList.size());
 
-
+        showIDDialog();
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -78,13 +78,11 @@ public class takeSurvey extends Activity implements View.OnClickListener {
                     progress.setText(currentQuestionID + "/" + questionList.size());
                 }
                 else {
-                    writeAnswer(takeSurvey.this, survey_ID, participantID, answerList);
-                    showDialog();
+                    writeAnswer(takeSurvey.this, survey_ID, participantID, participantPosition, answerList);
+                    showThxDialog();
                 }
             }
         });
-
-
 
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -106,12 +104,21 @@ public class takeSurvey extends Activity implements View.OnClickListener {
         });
     }
 
-    private void showDialog(){
+    private void showThxDialog(){
         MyAlert myAlert = new MyAlert();
         myAlert.show(getFragmentManager(), "My Alert");
     }
 
-    private static boolean writeAnswer(Context context, Integer survey_ID, Integer participantID, List<Integer> answerList){
+    public void showIDDialog(){
+        GiveID giveId = new GiveID();
+        giveId.show(getFragmentManager(), "Give ID");
+    }
+
+    public void giveID(String ID){
+        participantID = ID;
+    }
+
+    private static boolean writeAnswer(Context context, Integer survey_ID, String participantID, int participantPosition, List<Integer> answerList){
 
         boolean success = false;
 
@@ -152,14 +159,14 @@ public class takeSurvey extends Activity implements View.OnClickListener {
             }
 
             row = mySheet.getRow(0);
-            cell = row.createCell(participantID);
-            mySheet.setColumnWidth(participantID, (1000));
+            cell = row.createCell(participantPosition);
+            mySheet.setColumnWidth(participantPosition, (1000));
             cell.setCellValue(participantID);
 
 
             for(int i = 1; i <= answerList.size(); i++){
                 row = mySheet.getRow(i);
-                cell = row.createCell(participantID);
+                cell = row.createCell(participantPosition);
                 cell.setCellValue(answerList.get(i - 1).toString());
             }
 
@@ -232,7 +239,7 @@ public class takeSurvey extends Activity implements View.OnClickListener {
         }catch (Exception e){e.printStackTrace();}
     }
 
-    private static Integer getParticipantID(Context context, Integer survey_ID){
+    private static Integer getParticipantPosition(Context context, Integer survey_ID){
         //check if available and not read only
         if (!storageAvailable()) return null;
         Integer ID = 1;

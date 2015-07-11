@@ -73,7 +73,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onClick(View v) {
-        // saveExcelFile(MainActivity.this, "Survey.xls");
         readExcelFile(MainActivity.this, "Survey.xls");
     }
 
@@ -97,7 +96,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             startActivity(intent);
             return true;
         } else if(id == R.id.action_About){
-            showDialog();
+            showAboutDialog();
             return true;
         } else if (id == R.id.action_share){
             Intent intent = null, chooser = null;
@@ -118,7 +117,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog(){
+    private void showAboutDialog(){
         About about = new About();
         about.show(getFragmentManager(), "About");
     }
