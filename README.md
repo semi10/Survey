@@ -16,4 +16,4 @@ You can create/edit survey (sheet) manually by editing xls file directly..
 
 To view your answers you need to open xls file in other app. 
 
-You can export your survey list by pressing: option button -> Share.  
+You can export your survey list by pressing: "option" button -> Share.  
