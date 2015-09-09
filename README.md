@@ -1,6 +1,6 @@
 # Survey
 #### Android app for survey Creation & participation. Results exported as excel file.
-It creates xls file in your Document folder. Then for each survey you created it creates new sheet in xls format.
+It creates Survey.xls file in your Document folder. Then for each survey you created it creates new sheet in same xls file.
 
 When you create survey it ask you to enter your questions.
 
@@ -12,4 +12,8 @@ Each answer varies between 0 and 100 (seek bar).
 
 When you finish the survey your answers (integers) will be written next to the question in your id/name column in xls file. 
 
-You can create/edit new survey (sheet) manually by editing xls file directly..
+You can create/edit survey (sheet) manually by editing xls file directly..
+
+To view your answers you need to open xls file in other app. 
+
+You can export your survey list by pressing: option button -> Share.  
